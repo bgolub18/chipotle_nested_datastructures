@@ -1,5 +1,5 @@
 #The menu board at Chipotle Reads: 
-main = {
+menu = {
 	style: ["burrito", "bowl", "crispy corn tacos", "soft corn tacos", "soft flour tacos", "salad"],
 	meat: ["steak", "carnitas", "chicken", "barbacoa", "sofritas"],
 	rice_bean_veg: ["cilantro-lime brown rice", "cilantro-lime white rice", "black beans", "pinto beans", "fajita veggies"],
@@ -22,21 +22,88 @@ my_order = {}
 #STEP ONE:
 	#you are in line at chipotle and what to know what different styles they have
 	#Display all the options available for style 
+puts "The styles are:" 
+puts menu[:style]
 
 
 
 #STEP TWO:
 	#Using the empty my_order hash, 
 	#Chose your style from the available options and add a new key value pair to that hash
+puts ''
+puts 'What style do you want?'	
+style = gets.chomp
+until menu[:style].include? style.downcase
+	puts "Sorry, that is not a style option, please order again."
+	puts "What style do you want?"
+	style = gets.chomp
 
+end	
+my_order[:style] = style.downcase
 
+puts ''
 #STEP THREE:
 	#Chose what meat you want & add it to your my_order hash
-
+puts menu[:meat]	
+puts "What meat do you want?"
+meat = gets.chomp
+until menu[:meat].include? meat.downcase
+	puts "Sorry, that is not a style option, please order again."
+	puts "What style do you want?"
+	meat = gets.chomp
+end	
+my_order[:meat] = meat
+puts "This is going to be a flamo " + my_order[:meat] + ' ' + my_order[:style]
 #STEP FOUR:
-	#Chose what rice, bean or veggies you want and it it as a new key value pair to my_order. 
+	#Chose what rice, bean or veggies you want and it as a new key value pair to my_order. 
 		#HINT: You may want to chose more than one option, how will you store multiples in your order?
+puts '' 		
+puts "The rice, beans, and veggies are"  
+puts menu[:rice_bean_veg]
 
+puts "Do you want any rice, beans, or veggies?" 
+rbv = gets.chomp
+if rbv.downcase == "yes"
+	puts "Do you want rice?"
+	riceyesno = gets.chomp
+	if riceyesno.downcase == "yes"
+		puts "Which rice do you want, white or brown?"
+		rice = gets.chomp
+		if rice.downcase == "white"
+			my_order[:rice_bean_veg] = "cilantro-lime white rice"
+		elsif rice.downcase == "brown"
+			my_order[:rice_bean_veg] = "cilantro-lime brown rice"
+		else puts "Sorry, we don't have that rice here."	
+		end
+	else puts "Ok, let\'s move on."
+	end	
+	puts "Do you want beans?"
+	beansyesno = gets.chomp
+	if beansyesno.downcase == "yes"
+		puts "Which beans do you want, black beans or pinto beans?"
+		beans = gets.chomp
+		if beans.downcase == "black beans"
+			my_order[:rice_bean_veg] << "black beans"
+		elsif beans.downcase == "pinto beans"
+			my_order[:rice_bean_veg] << "pinto beans"
+		else puts "Sorry, we don\'t have those beans here."
+		end
+	else puts "Next we have veggies."
+	end
+	puts "Do you want fajita veggies?"
+	veg = gets.chomp
+	if veg.downcase == "yes"
+		my_order[:rice_bean_veg] << "fajita veggies"
+	else puts 'veggies aren\'t that good anyways.'
+	end
+else puts "Okay, the toppings server will be with you shortly."
+	puts ''
+	puts ''
+	puts''
+end			
+				
+						
+					
 #STEP FIVE
 	#Check to see if your favorite topping is included in the available options
 
